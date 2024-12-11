@@ -1,0 +1,89 @@
+-- Tabelle für die Reviere
+CREATE TABLE Revier (
+    Revier_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255)
+);
+
+-- Tabelle für die Gebäude
+CREATE TABLE Gebäude (
+    Gebäude_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255)
+);
+
+-- Tabelle für die Tiere
+CREATE TABLE Tier (
+    Tier_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255),
+    Revier_ID INT,
+    Gebäude_ID INT,
+    FOREIGN KEY (Revier_ID) REFERENCES Revier(Revier_ID),
+    FOREIGN KEY (Gebäude_ID) REFERENCES Gebäude(Gebäude_ID)
+);
+
+-- Tabelle für die Pfleger
+CREATE TABLE Pfleger (
+    Pfleger_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255),
+    Adresse VARCHAR(255),
+    Telefonnummer VARCHAR(20),
+    Revier_ID INT,
+    FOREIGN KEY (Revier_ID) REFERENCES Revier(Revier_ID)
+);
+
+-- Tabelle für das Futter
+CREATE TABLE Futter (
+    Futter_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255)
+);
+
+-- Tabelle für die Lieferanten
+CREATE TABLE Lieferant (
+    Lieferant_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255)
+);
+
+-- Tabelle für die Mengen
+CREATE TABLE Menge (
+    Menge_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Menge DECIMAL(10, 2),
+    Futter_ID INT,
+    Lieferant_ID INT,
+    FOREIGN KEY (Futter_ID) REFERENCES Futter(Futter_ID),
+    FOREIGN KEY (Lieferant_ID) REFERENCES Lieferant(Lieferant_ID)
+);
+
+-- Tabelle für die Zeiten
+CREATE TABLE Zeit (
+    Zeit_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Uhrzeit TIME
+);
+
+-- Tabelle für die Tage
+CREATE TABLE Tag (
+    Tag_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Wochentag VARCHAR(50)
+);
+
+-- Verbindung zwischen Tieren und Futter
+CREATE TABLE Tier_Futter (
+    Tier_ID INT,
+    Futter_ID INT,
+    Menge_ID INT,
+    PRIMARY KEY (Tier_ID, Futter_ID, Menge_ID),
+    FOREIGN KEY (Tier_ID) REFERENCES Tier(Tier_ID),
+    FOREIGN KEY (Futter_ID) REFERENCES Futter(Futter_ID),
+    FOREIGN KEY (Menge_ID) REFERENCES Menge(Menge_ID)
+);
+
+-- Verbindung zwischen Pfleger und Tieren (mit Zeit und Tag)
+CREATE TABLE Pfleger_Tier (
+    Pfleger_ID INT,
+    Tier_ID INT,
+    Zeit_ID INT,
+    Tag_ID INT,
+    PRIMARY KEY (Pfleger_ID, Tier_ID, Zeit_ID, Tag_ID),
+    FOREIGN KEY (Pfleger_ID) REFERENCES Pfleger(Pfleger_ID),
+    FOREIGN KEY (Tier_ID) REFERENCES Tier(Tier_ID),
+    FOREIGN KEY (Zeit_ID) REFERENCES Zeit(Zeit_ID),
+    FOREIGN KEY (Tag_ID) REFERENCES Tag(Tag_ID)
+);
