@@ -6,8 +6,8 @@
 🎶 **STEP-BY-STEP-TUTORIAL – JETZT WIRD’S WILD!** 🎶  
 
 1️⃣ **SCHRITT 1**:  
-👑 **Gib deiner Datenbank den königlichsten Namen aller Zeiten** – wie ein echter Zoo-Kapitän! 🐾  
-🎉 Klicke dann auf *Erstellen* und lass die Datenbank-Magie beginnen! ✨  
+👑 **Importiere die .SQL Datei** – wie ein echter Zoo-Kapitän! 🐾  
+🎉 Klicke dann auf den SQL Tab und lass die Datenbank-Magie beginnen! ✨  
 
 2️⃣ **SCHRITT 2**:  
 📜 Öffne die heilige Schriftrolle namens `Befehl_1.txt`.  
